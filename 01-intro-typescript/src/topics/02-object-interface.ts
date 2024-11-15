@@ -1,6 +1,6 @@
 //! Not recomended
-let badSkills = ['Dash', 'Counter', 'Hit', true, 23]
-// it looks a lot like my javascript code...
+//! let badSkills = ['Dash', 'Counter', 'Hit', true, 23]
+//! it looks a lot like my javascript code...
 
 //* Recomended, seriously.
 const skills: string[] = ['Hit', 'Heal', 'Dash']
