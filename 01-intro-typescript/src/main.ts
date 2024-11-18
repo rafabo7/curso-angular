@@ -6,7 +6,8 @@ import './style.css'
 // import './topics/03-functions'
 // import './topics/04-homework-types'
 // import './topics/05-basic-destructuring'
-import './topics/06-argument-destructuring'
+// import './topics/06-argument-destructuring'
+import './topics/07-import-export'
 
 
 // import typescriptLogo from './typescript.svg'

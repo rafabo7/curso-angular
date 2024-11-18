@@ -1,5 +1,5 @@
 // Simple interface
-interface Product {
+export interface Product {
     description: string
     price: number
 }
@@ -27,7 +27,7 @@ interface TaxCalculationOptions {
 
 // This is more readable when more argument come in, and believe me they will come in.
 // If you know you expect a tuple you can type the return value with => [number, number]
-function taxCalculation( options: TaxCalculationOptions ): [number, number] {
+export function taxCalculation( options: TaxCalculationOptions ): [number, number] {
     let { products, tax } = options
 
     let total = 0
@@ -53,7 +53,3 @@ let [totalPrice, totalTax] = taxCalculation( {
 console.log('Total price:', totalPrice)
 console.log('Total taxes:', totalTax)
 
-
-
-
-export {};
