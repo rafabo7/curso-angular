@@ -23,7 +23,7 @@ const audioPlayer: AudioPlayer = {
     }
 }
 
-//Destructuring
+//Object destructuring
 
 const { 
     // Simple destructuring
@@ -44,7 +44,15 @@ const {
 //* const { author } = details
 //* He is not wrong => readability is always over a little-micro-minimum of efficiency.
 
+// Tip: if you log data as an object it will be displayed more clearly on the console
 console.log({ song, author, duration });
+
+// Array destructuring
+const dbz: string[] = ['Goku', 'Vegeta', 'Trunks']
+// If you only want Trunks, with a default value in case there is no index 2
+const [ , , p3 = 'Not found'] = dbz
+
+console.error('Player 3:', p3)
 
 
 
