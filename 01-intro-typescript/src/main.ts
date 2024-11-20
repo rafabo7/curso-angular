@@ -7,7 +7,8 @@ import './style.css'
 // import './topics/04-homework-types'
 // import './topics/05-basic-destructuring'
 // import './topics/06-argument-destructuring'
-import './topics/07-import-export'
+// import './topics/07-import-export'
+import './topics/08-classes'
 
 
 // import typescriptLogo from './typescript.svg'
