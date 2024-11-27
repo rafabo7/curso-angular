@@ -68,7 +68,7 @@ console.log(spiderman);
 export class Hero2 {
 
     // 1. Declare a prop typed with the prior father
-    // public person: Person
+    //* public person: Person
 
     constructor(
         public alterEgo: string,
@@ -78,14 +78,14 @@ export class Hero2 {
         public person: Person 
 
     ){
-        // 2. Construct the instace fo the prior father with its arguments
+        // 2. Construct the instace for the prior father with its arguments
         // Pitfall: we have the reference to Person in our constructor for Hero2. If Person changes, Hero2 will be afected
-        // this.person = new Person( realname )
+        //* this.person = new Person( realname )
     }
 
 }
 
-// 4. Create an instace that will be pass to the next constructor
+// 4. Create an instace that will be passed to the next constructor
 // 5. If the Person change in this scenario, Hero2 isn´t (that much) affected
 const bruce = new Person('Bruce', 'Gotham')
 const batman = new Hero2('Batman', 45, 'Bruce', bruce)
