@@ -9,7 +9,8 @@ import './style.css'
 // import './topics/06-argument-destructuring'
 // import './topics/07-import-export'
 // import './topics/08-classes'
-import './topics/09-generics'
+// import './topics/09-generics'
+import './topics/10-decorators'
 
 
 // import typescriptLogo from './typescript.svg'
