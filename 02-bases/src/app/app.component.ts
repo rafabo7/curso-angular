@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = '02-bases';
+  public title: string = 'Hola Mundico';
+  public counter: number = 10;
+
+  updateCounter( value: number ): void {
+    this.counter += value
+  }
+
+  resetCounter(): void {
+    this.counter = 10
+  }
 }
