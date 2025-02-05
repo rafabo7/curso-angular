@@ -69,5 +69,23 @@ Y dentro de una class exportada se declaran los atributos del objeto-componente,
     }
 
 Cuando declaramos un nuevo componente hay que incluir en la lista *declarations* en el archivo *app.module.ts*
+
 El archivo **app.module.ts** es el módulo raíz de la aplicación Angular. Define qué componentes, directivas, pipes y servicios están disponibles en la aplicación.
+
+Para crear componentes es muy común usar la Angular Command Line Interface, que agiliza el proceso de crear varios archivos con el mismo nombre y el mismo sufijo '.component', así como sus respectivos enlaces con estilos y selectores.
+
+## One way data binding
+(Enlazado de una sola vía)
+
+Es el concepto de que los atributos de una clase componente se representen de maera dinámica en el html (es parecido al jsx de React(?)).
+
+Angular también permite *two way data binding*, es decir, que la vista afecte al modelo.
+
+Pero hay que priorizar el *one way data binding*
+
+>![NOTE]
+>Las clases de TypeScript también tienen getters y setters, pero en VSCode se ven como si fueran atributos en el autocompletad.
+>Los getters y setters se declaran con get y set.
+
+
 
