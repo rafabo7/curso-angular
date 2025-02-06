@@ -83,9 +83,27 @@ Angular también permite *two way data binding*, es decir, que la vista afecte a
 
 Pero hay que priorizar el *one way data binding*
 
->![NOTE]
->Las clases de TypeScript también tienen getters y setters, pero en VSCode se ven como si fueran atributos en el autocompletad.
->Los getters y setters se declaran con get y set.
+> [!NOTE]
+> Las clases de TypeScript también tienen getters y setters, pero en VSCode se ven como si fueran atributos en el autocompletad.
+> Los getters y setters se declaran con get y set.
+
+## Directivas
+Las directivas en Angular son instrucciones propias que modifican el DOM. Es decir, es la manera de Angular, inscrita en su ciclo de detección, de manipular el DOM. A diferencia de la manera imperativa de JavaScript para manipular el DOM, las directivas pueden hacerlo de manera declarativa y con una lógica agregada.
+
+Es importante usar estas directivas para manipular el DOM. La forma natva de JS, con querySelector u otros métodos no será detectado por el ciclo de detección de cambios y causará comportamientos inesperados.
+
+#### ngIf
+ngIf es una directiva que permite mostrar u ocultar un elemento basándose en una expresión booleana.
+
+#### ngFor
+ngFor itera sobre un atributo iterable de la class del componente. Es la manera de Angular para renderizar un array u objeto como una lista.
+
+Es necesario declarar un nombre para los elementos a iterar.
+
+El contenido a renderizar irá dentro de la etiqueta que tiene la directiva ngFor, obligatoriamente la etiqueta 'li'
+
+
+
 
 
 
