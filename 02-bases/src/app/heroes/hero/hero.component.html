@@ -17,12 +17,22 @@
 
 </dl>
 
-<button (click)="changeHero()"
-class="btn btn-primary mx-2">
+<button
+  *ngIf="name !== 'Spiderman'"
+  (click)="changeHero()"
+  class="btn btn-primary mx-2">
   Change name
 </button>
 
-<button (click)="changeAge()"
-class="btn btn-primary">
+<button
+  *ngIf="age !== 25"
+  (click)="changeAge()"
+  class="btn btn-primary mx-2">
   Change age
+</button>
+
+<button
+  (click)="reset()"
+  class="btn btn-primary mx-2">
+  Reset
 </button>
