@@ -10,5 +10,10 @@ export class ListComponent {
   public heroNames: string[] = [
     'Spiderman', 'Ironman', 'Hulk', 'Thor', 'Batman'
   ]
+  public deletedHero?:string
+
+  removeLastHero():void {
+    this.deletedHero = this.heroNames.pop()
+  }
 
 }
