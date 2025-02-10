@@ -86,6 +86,7 @@ Pero hay que priorizar el *one way data binding*
 > [!NOTE]
 > Las clases de TypeScript también tienen getters y setters, pero en VSCode se ven como si fueran atributos en el autocompletad.
 > Los getters y setters se declaran con get y set.
+> El binding sólo se hace con los atributos del scope de la class, no con variables que se declaren dentro de métodos.
 
 ## Directivas
 Las directivas en Angular son instrucciones propias que modifican el DOM. Es decir, es la manera de Angular, inscrita en su ciclo de detección, de manipular el DOM. A diferencia de la manera imperativa de JavaScript para manipular el DOM, las directivas pueden hacerlo de manera declarativa y con una lógica agregada.
@@ -101,6 +102,30 @@ ngFor itera sobre un atributo iterable de la class del componente. Es la manera 
 Es necesario declarar un nombre para los elementos a iterar.
 
 El contenido a renderizar irá dentro de la etiqueta que tiene la directiva ngFor, obligatoriamente la etiqueta 'li'
+
+### ngIf-else + ng-Template
+
+#### ngIf-else
+una directiva que viene a evitar el encadenamiento de ngIf.
+Como su nombre indica se comprueba una condición, si no se cumple se renderiza el elemento html con la referencia local indicada.
+
+Referencia local:
+    
+    #localReference
+    Siempre dentro del mismo archivo de html.
+
+Declaración de ngIf-else:
+    
+    *ngIf="deletedHero; else notDeleted"
+
+#### ng-Template
+Es un elemento virtual del DOM que se renderizará o no según una expresión dada.
+La expresión se expresa como una referencia local.
+Declaración de un ng-template:
+    
+    <ng-template #notDeleted >
+    <h4>No se ha borrado nada</h4>
+    </ng-template>
 
 
 
