@@ -127,6 +127,37 @@ Declaración de un ng-template:
     <h4>No se ha borrado nada</h4>
     </ng-template>
 
+## Módulos en Angular
+
+Un modulo en ES6 es un archivo exportado e importado por otros archivos.
+
+En Angular, un módulo es una class, con un decorador que establece sun funcionalidad y que se importa en diversos archivos de nuestra app.
+
+Cada módulo entonces encapsula una funcionalidad. Cohesionan el código que tiene funcionamiento en común.
+
+Por defecto los primeros componentes vienen importados y declarado en el archivo *app.module.ts*
+
+Sin embargo a medida que crece una app los componentes y por lo tanto los módulos pueden aumentar en número rápidamente y no es conveniente gestionarlos todos desde el mismo archivo *x.module.ts*. Por ello se declaran otros archivos del mismo tipo que encapsulan la funcionalidad de unos componentes que conviven en la app. A su vez, los módulos declarados deben ser exportados e importados por el archivo principal *app.module.ts*
+
+Estos módulos, de nuevo, son class declaradas de la siguiente manera:
+
+    import { NgModule } from "@angular/core";
+    import { CounterComponent } from "./components/counter/counter.component";
+
+    @NgModule({
+      declarations: [
+        CounterComponent
+      ],
+      exports: [
+        CounterComponent
+      ]
+
+    })
+    export class CounterModule {
+
+    }
+
+
 
 
 
