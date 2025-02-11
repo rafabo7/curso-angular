@@ -157,6 +157,8 @@ Estos módulos, de nuevo, son class declaradas de la siguiente manera:
 
     }
 
+En el array de declarations irán los componentes, que llevan el sufijo Component en su nombre. En el array de imports, siempre irán modulos, con el nombre de la class declarad, por ejemplo: *CounterModule*
+
 
 
 
