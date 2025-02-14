@@ -160,6 +160,15 @@ Estos módulos, de nuevo, son class declaradas de la siguiente manera:
 En el array de declarations irán los componentes, que llevan el sufijo Component en su nombre. En el array de imports, siempre irán modulos, con el nombre de la class declarad, por ejemplo: *CounterModule*
 
 
+### Directorios *pages*
+
+Normalmente cuando trabajamos con Angular vamos a dividir la aplicación en componentes, eso está claro.
+
+Sin embargo estos componentes con mucha seguridad integran a su vez otros componentes que atomizan la funcionalidad y la lógica de la app.
+
+Estos componentes que agrupan a los componentes más pequeños se denominan páginas o *pages*, que tienen su utilidad especialmente cuando se implementa un router.
+
+
 
 
 
