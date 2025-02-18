@@ -168,6 +168,22 @@ Sin embargo estos componentes con mucha seguridad integran a su vez otros compon
 
 Estos componentes que agrupan a los componentes más pequeños se denominan páginas o *pages*, que tienen su utilidad especialmente cuando se implementa un router.
 
+### Decorador @Input()
+
+@Input() es un decorador de propiedad o atributo de una clase de TypseScript.
+
+Permite pasar una propiedad desde un elemento o componente padre a un componente hijo.
+
+Se declara con la siguiente sintaxis en archivo TS del componente hijo:
+
+    @Input()
+    public twoProp: prop[] = []
+
+Y la siguiente sintaxis en archivo HTML del componente padre:
+
+    <childComp [twoProp] = 'oneProp' ></childComp>
+
+**Siempre cumpliendo con los tipos e interfaces**
 
 
 
