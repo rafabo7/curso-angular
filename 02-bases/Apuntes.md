@@ -101,7 +101,47 @@ ngFor itera sobre un atributo iterable de la class del componente. Es la manera 
 
 Es necesario declarar un nombre para los elementos a iterar.
 
-El contenido a renderizar irá dentro de la etiqueta que tiene la directiva ngFor, obligatoriamente la etiqueta 'li'
+El contenido a renderizar irá dentro de la etiqueta que tiene la directiva ngFor, obligatoriamente la etiqueta 'li'.
+
+ngFor tiene en su haber algunas herramientas para manejar condiciones a la hora de renderizar listas.
+
+En concreto las más comunes son propiedades declaradas internamente por Angular que nosotros podemos asignar a la hora de utilizar un ngFor. Las más comunes son: **index, first, last**.
+
+Se declaran dentro de la directiva así: 
+
+    *ngFor="
+        let character of characterList;
+        let i = index;
+        let isFirst = first;
+        let isLast = last;
+        let isEven = even
+        let isOdd = odd"
+
+*Usaremos estas como ejemplo, aunque sea un poco exagerado. Angular tiene otras propiedades para el ngFor que se pueden consultar en la doc. Tip: también se pueden pasar built-in functions o personalizadas*
+
+Esto es especialmente útil si también usamos el ngClass para estilos. En el caso de este curso, con Bootstrap.
+
+###  ngClass
+
+Enlaza clases de CSS basado en un objeto expresion.
+
+Se usa en el elemento que renderiza cada elemento de una lista. Es decir el list item (li). Seguido del ngFor con todo lo que declaremos:
+
+    [ngClass]="{
+        'list-group-item-dark' : isLast,
+        'list-group-item-info': isEven
+      }"
+
+Se podría usar también con nuestras propieas clases de CSS.
+
+> [!NOTE]
+> Cuando un atributo HTML se coloca entre corchetes [] se convierte en dinámico. Se podrá manipular, leer y modificar de forma dinámica con diferentes herramientas de Angular. Se asginan a expresiones de Javascript.
+
+
+
+
+
+
 
 ### ngIf-else + ng-Template
 
