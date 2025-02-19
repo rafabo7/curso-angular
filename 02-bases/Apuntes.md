@@ -77,7 +77,7 @@ Para crear componentes es muy común usar la Angular Command Line Interface, que
 ## One way data binding
 (Enlazado de una sola vía)
 
-Es el concepto de que los atributos de una clase componente se representen de maera dinámica en el html (es parecido al jsx de React(?)).
+Es el concepto de que los atributos de una clase componente se representen de manera dinámica en el html (es parecido al jsx de React(?)).
 
 Angular también permite *two way data binding*, es decir, que la vista afecte al modelo.
 
@@ -225,7 +225,28 @@ Y la siguiente sintaxis en archivo HTML del componente padre:
 
 **Siempre cumpliendo con los tipos e interfaces**
 
+### Decorador @Output()
 
+Al contratio que @Input(), el decorador @Output() permite a un componente "emitir" valores, atributos u objetos hacia el componente padre.
+
+Una vez el padre tienen acceso a la información necesaria es común pasarla entonces hacia otros componentes hermanos del componente original que emitió los datos.
+
+Así funcionan los formularios simples que vamos a estar viendo.
+
+
+### Introducción a Formularios
+
+Para los formularios se recomienda hacer uso del *one way data binding* sobre el *two way data binding*. En el *two way data binding* los cambios en la clase del componente se reflejan en el template, y los del template en la clase. Cada cambio en cualquiera de estas partes provoca un refresco de la página debido a la detección de cambios de Angular, si no llevamos cuidados podemos crear un loop de refrescos infinito.
+
+*One way data binding* mantiene la clase enlazada al template, pero no al revés, por lo que es más sencillo, más recomendable al principio, aunque algunas funcionalidades quedarán cojas.
+
+**Recordatorio**
+
+[Corchetes] para que un atributo en el template apunte a un atributo de la clase del componente.
+
+(Paréntesis) para un atributo en el template que apunta a eventos.
+
+[(*Banana Box*)] asocian un atributo y un evento al mismo tiempo.
 
 
 
