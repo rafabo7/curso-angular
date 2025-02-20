@@ -4,23 +4,22 @@
         *ngFor="
           let character of characterList;
           let i = index;
-          let isFirst = first;
           let isLast = last;
-          let isEven = even;
-          let isOdd = odd"
-        class="list-group-item"
+          let isEven = even;"
+        class="list-group-item d-flex justify-content-between align-items-center"
         [ngClass]="{
           'list-group-item-dark' : isLast,
           'list-group-item-info': isEven
         }">
 
-        <span class="text-primary">{{ i+1 }}. </span>
+        <div>
+          <span class="text-primary">{{ i+1 }}. </span>
+          <span>{{character.name}} - </span>
+          <strong>Power: </strong>
+          <span>{{character.power}}</span>
+        </div>
 
-        <span>{{character.name}} - </span>
-
-        <strong>Power: </strong>
-
-        <span>{{character.power}}</span>
+        <button type="button" class="btn btn-danger" (click)="onDeleteCharacter(i)">X</button>
 
       </li>
     </ul>

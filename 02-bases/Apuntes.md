@@ -231,7 +231,53 @@ Al contratio que @Input(), el decorador @Output() permite a un componente "emiti
 
 Una vez el padre tienen acceso a la información necesaria es común pasarla entonces hacia otros componentes hermanos del componente original que emitió los datos.
 
-Así funcionan los formularios simples que vamos a estar viendo.
+Así funcionan los formularios simples que vamos a estar viendo. Esto se hace con @Output() junto con la utilidad *EventEmitter*
+
+**La sintaxis básica para emitir eventos a componentes padre es la siguiente**
+
+En el componente que debe emitir la información:
+
+    import { Component, **EventEmitter**, Input, **Output** } from '@angular/core';
+    
+    export class ListComponent {
+
+      @Input()
+      public characterList: Character[] = []
+
+      **********************************************************
+      @Output()
+      public onDeleteOnChild: EventEmitter<number> = new EventEmitter()
+      **********************************************************
+
+
+      onDeleteCharacter( index: number ): void {  <-- A su vez, será normal que un evento en el hijo llame al EventEmitter hacia el padre.
+        *************************
+        this.onDeleteOnChild.emit(index)
+        *************************
+      }
+
+    }
+
+Esto expondrá el método onDelete como si fuera un evento, gracias a EventEmitter, para que el componente padre lo pueda 'escuchar'. Sin embargo lo interesante es que lo que se emite es la información, en este caso el index, que se podrá capturar en el componente padre.
+
+El componente padre podrá escuchar el evento emitido con la notación de (losEventos | click | etc) para entonces asignarle un método en su class como a cualquier otro evento. Con la particularidad de que a ese método le podrá pasar directamente la información emtidia por el componente hijo gracias a la notación '$event'
+
+    padre.component.html:
+    <dbz-list
+      [characterList]="characters"
+      (onDeleteOnChild)="onDeleteOnParent($event)" ></dbz-list>
+
+
+
+    padre.component.ts:
+    export class ParentComponent {
+
+      public onDeleteOnParent( index: number ) {
+        this.someAtribute.splice(index, 1)
+      }
+
+    }
+
 
 
 ### Introducción a Formularios

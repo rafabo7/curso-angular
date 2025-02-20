@@ -20,8 +20,13 @@ export class MainPageComponent {
   }]
 
   public onNewCharacter(character: Character):void {
-    console.log(character);
-    // this.characters.push(character)
+    this.characters.push(character)
+
+  }
+
+  public onDelete(index: number){
+    this.characters.splice(index, 1)
+
 
   }
 
