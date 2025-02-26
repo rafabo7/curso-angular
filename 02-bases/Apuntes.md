@@ -32,3 +32,17 @@
     - app.component.spec.ts -> los tests de la lógica del componente app.
     - app.config.ts
     - app.routes.ts
+
+
+### Signals
+
+La nueva forma de renderizar cambios en clases de Angular, para ser sincero a mi no me parecía nada mal lo del data binding pero bueno, dejemos a los pros hacer de pros.
+
+Las signals son unas funciones que almacenas y actualizan valores que sabemos que van a cambiar a lo largo del tiempo de ejecución de la app. Se usa una sintaxis más o menos así:
+
+    public dataSignal = signal(value)
+
+    - - Tiene funciones como - -
+
+    dataSignal.set(value) - para setear el valor, ignoradon valores anteriores.
+    dataSignal.update( current => current * value ) - para actualizar mediante una callback que toma como argumento el valor actual.
