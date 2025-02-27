@@ -34,6 +34,9 @@
     - app.routes.ts
 
 
+*Se llama pages a componentes que ocupan toda la pantalla, como convención*
+
+
 ### Signals
 
 La nueva forma de renderizar cambios en clases de Angular, para ser sincero a mi no me parecía nada mal lo del data binding pero bueno, dejemos a los pros hacer de pros.
@@ -46,3 +49,12 @@ Las signals son unas funciones que almacenas y actualizan valores que sabemos qu
 
     dataSignal.set(value) - para setear el valor, ignoradon valores anteriores.
     dataSignal.update( current => current * value ) - para actualizar mediante una callback que toma como argumento el valor actual.
+
+#### Señales computadas o Read Only Singlas
+
+Las señales computadas son señales que son solo de lectura. Sólo pueden cambiar si sus dependencias, es decir sus atributos en la clase, cambian
+
+
+### Pipes
+
+Los pipes transforman de manera visual la informacion que mostraremos en pantalla, sin cambias los datos o a los atributos de nuestras clases reales
