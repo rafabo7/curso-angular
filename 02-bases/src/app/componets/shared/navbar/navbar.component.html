@@ -1,0 +1,41 @@
+<style>
+  nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: #212121;
+    color: white;
+    padding: 10px;
+
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    padding: 1rem 0;
+    width: 8rem;
+    text-align: center;
+    border-radius: 12px;
+  }
+
+  nav a:hover {
+    opacity: 0.80;
+  }
+
+  nav a.active{
+    color: #444;
+    background-color: #eee;
+  }
+</style>
+
+<nav>
+  <a
+    routerLink="/"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact:true }"
+  >Counter
+</a>
+  <a 
+    routerLink="/hero" 
+    routerLinkActive="active" 
+  >Heros</a>
+</nav>
