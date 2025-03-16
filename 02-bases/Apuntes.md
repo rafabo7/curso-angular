@@ -58,3 +58,21 @@ Las señales computadas son señales que son solo de lectura. Sólo pueden cambi
 ### Pipes
 
 Los pipes transforman de manera visual la informacion que mostraremos en pantalla, sin cambias los datos o a los atributos de nuestras clases reales
+
+### Referencias locales
+
+Cuando es necesario declarar un atributo *value* en un input por ejemplo, a un valor que depende de una señal, lo correcto es utilizar la sintaxis que los componentes emplean para hacer referencias a atributos de la clase:
+
+    [value]="singalData()"
+
+Sin embargo, para recuperar datos, eventos o, más adelante, métodos de referencias del DOM hay que declarar una referencia local. Brevemente, una referencia local es el equivalente a referenciar un nodo del DOM en Javascript y asignarlo a una varialbe, sólo que aquí directamente declaramos la variable, por así decirlo.Esto resulta útil para muchas cosas, de momento lo utilizamos igual que muchas veces utilizamos la referencias al DOM en JS, para capturar el valor de un evento, por eso es más o menos equivalente a un e.target.value.
+
+ La sintaxis es la siguiente
+
+    <input
+    [value]="singalData()"
+    #txtInput                                 // la referencia local con #
+    (input)=signalData.set( #txtInput.value ) // sí, la referencia funciona en su mismo nodo
+    >
+
+
