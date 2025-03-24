@@ -1,0 +1,22 @@
+<h3>Listado de personajes fuertes</h3>
+    <ul>
+      @for (character of characters(); track character.id;
+              let i = $index ) {
+
+        @if (character.power > 500) {
+          <li>
+            <span>{{i+1}}. {{character.name}} </span>
+            <strong
+              [class.text-danger]="character.power > 9000"
+              [class.text-info]="character.power <= 9000"
+             class="text-danger"> ({{character.power}})
+            </strong>
+          </li>
+        } @else {
+          <li>
+            <span class="text-secondary"  >{{character.name}} is not worthy</span>
+          </li>
+        }
+      }
+
+    </ul>
