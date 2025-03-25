@@ -75,4 +75,21 @@ Sin embargo, para recuperar datos, eventos o, más adelante, métodos de referen
     (input)=signalData.set( #txtInput.value ) // sí, la referencia funciona en su mismo nodo
     >
 
+### Inputs, pasar *data* a un componente hijo
 
+Para que un componente reciba un valor de un componente padre es necesario declarar una variable para almacenar este valor con el metodo input. La sintaxis tendría este aspecto:
+
+    En el componente padre:
+    ----------------------------
+     <dragonball-character-list
+      [characters]="characters()" />
+    
+Recuerda: llaves cuadradas indican la variable de la clase del componente. Es decir, en este caso, el atributo *characters* en la clase CharacterList(){}. Lo que se le pasa al atributo es el valor desde un atributo, en este caso una *signal* del componente padre, por eso los parentesis.
+
+    En el componente hijo:
+    -----------------------------------
+    characters = input.required<Character[]>()
+    Se declara el atributo para almancenar los datos para su posterior uso
+
+
+### Outputs, emitir *data* a un componente padre

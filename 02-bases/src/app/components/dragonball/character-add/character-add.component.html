@@ -1,0 +1,27 @@
+
+<h3>Add character: {{name()}}</h3>
+<label for="name">Name</label>
+<input
+  id="name"
+  type="text"
+  class="form-control"
+  [value]="name()"
+  (change)="name.set( txtName.value )"
+  #txtName
+/>
+
+<label for="power">Power</label>
+<input
+  id="power"
+  type="number"
+  class="form-control mt-2"
+  [value]="power()"
+  (change)="power.set( +txtPower.value )"
+  #txtPower
+  />
+
+<button
+  (click)="addCharacter()"
+  class="mt-2 btn btn-primary">
+  Add
+</button>
