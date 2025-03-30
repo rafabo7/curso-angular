@@ -4,7 +4,8 @@
 <section class="row">
   <div class="col-12 col-sm-6">
 
-    <dragonball-character-add />
+    <dragonball-character-add
+      (newCharacter)="dragonballService.addCharacter($event)"/>
 
     <!-- Hasta aqui -->
 
@@ -14,7 +15,7 @@
 
     <dragonball-character-list
       listName="Character List - 2025"
-      [characters]="characters()" />
+      [characters]="dragonballService.characters()" />
     <!-- [characters] es el atributo de character-list, por eso va entre llaves
 
     characters() es la señal de dragonball-super, declarada en su clase, y por eso va con paréntesis -->

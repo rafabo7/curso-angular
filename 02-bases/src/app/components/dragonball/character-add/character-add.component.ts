@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, input, output } from '@angular/core';
 import { Character } from '../../../interfaces/character.interface';
 
 @Component({
@@ -12,17 +12,20 @@ export class CharacterAddComponent {
   name = signal('Gohan')
   power = signal(1000)
 
+  newCharacter = output<Character>()
+
 
   addCharacter () {
     if ( !this.name() || !this.power() || this.power() <= 0 ) return
     const newCharacter: Character = {
       // id: this.characters().length+1,
-      id:65654,
+      id: Math.floor(Math.random() * 100),
       name: this.name(),
       power: this.power()
 
     }
-    console.log({ newCharacter });
+
+    this.newCharacter.emit(newCharacter)
     this.resetInputs()
   }
 

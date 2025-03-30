@@ -93,3 +93,91 @@ Recuerda: llaves cuadradas indican la variable de la clase del componente. Es de
 
 
 ### Outputs, emitir *data* a un componente padre
+
+Similar a los emitters de otros frameworks, en Angular existe un tipo de objeto incluído que permite mandar información de un componente hijo a un componente padre.
+
+Será común que esa informmación que tenemos que pasar sea interactiva o recuperada de un backend, por lo que muchas veces serán *signals*. Si la información es interactiva tendremos señales vinculadas a inputs, y estos inputs o forms tendrán asignados sus eventos y funciones que llamar a continuación.
+
+El primer paso para emitir esa información es declarar el objeto *output()*.
+
+    newCharacterOut = output<Character>()
+
+Este output se podrá usar en los métodos del componente hijo, pasandole como argumento la informacion que se desea emitir.
+
+    addCharacterChild () {
+      const newCharacter: Character = {
+        id: Math.floor(Math.random() * 100),
+        name: this.name(),
+        power: this.power()
+      }
+
+      **this.newCharacterOut.emit(newCharacter)**
+    }
+
+Esto emitirá un evento hacia el componente padre, que podrá ser capturado igual que otros eventos, con el identificador entre paréntesis.
+En el componente padre
+
+    Componente padre:
+    <dragonball-character-add
+      (newCharacterOut)="addCharacterParent($event)"/>
+
+    Se captura el evento entre paréntesis y se llama un método de la clase padre para que se ejecute cuando se dispare
+    La palabra clave $event traslada el valor (value) del evento
+
+Una vez capturado se puede usar la información en la clase del componente padre, o pasarla a su vez a un componente hermano.
+
+    addCharacterParent (newCharacter: Character) {
+      this.characters.update(
+        list => [...list, newCharacter]
+      )
+    }
+
+Pero obviamente estos cambios no son persistentes, son atributos que se declaran cuando se construye el componente. Para que estos valores persistan el curso propone en este punto almacenar la información no en la clase, sino en un **service**
+
+### Servicios en Angular
+
+Un servicio en Angular y otros frameworks es un archivo en el que se centraliza la lógica y la información de un componente o un grupo de ellos.
+
+Además en Angular, un servicio es una clase que con el decorador *@Injectable* se puede hacer inyección de dependencias.
+
+A continuación se muestra cómo se propone que se haga la inyección de dependencias en las nuevas versiones de Angular.
+
+    import { Injectable, signal } from '@angular/core';
+    import { Character } from '../interfaces/character.interface';
+
+    @Injectable({providedIn: 'root'})
+    export class DragonballService {
+      constructor() { } // el constructor se usaba en anteriores versiones, aun está disponible pero se promueve la nueva forma.
+      // Aquí iría toda la info y métodos
+
+      characters = signal<Character[]>([
+        {id: 1, name: 'Goku', power: 9001},
+        {id: 2, name: 'Vegeta', power: 8000}
+      ])
+
+      addCharacter (newCharacter: Character) {
+        this.characters.update(
+          list => [...list, newCharacter]
+        )
+
+      }
+
+    }
+
+Y para inyectarlo en el componente:
+
+    public dragonballService = inject( DragonballService )
+
+Ahora que habría que cambiar las referencias a los atributos y métodos.
+
+    Ya no sería por ejemplo:
+
+    addCharacter()
+
+    Sino:
+
+    dragonbalService.addCharacter($event)
+
+Una vez almacenados ahí, los datos no cambiarán cuando se renderize el componente, solo cambiarán cuando se construya de nuevo la clase del servicios, es decir, cuando se refresque la pagina.
+
+
