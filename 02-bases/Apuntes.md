@@ -180,4 +180,22 @@ Ahora que habría que cambiar las referencias a los atributos y métodos.
 
 Una vez almacenados ahí, los datos no cambiarán cuando se renderize el componente, solo cambiarán cuando se construya de nuevo la clase del servicios, es decir, cuando se refresque la pagina.
 
+### Efectos
+
+Los Efects en Angular, muy parecidos a React, son operaciones o bloques de código.
+
+Estos bloques de código están vinculados a una signal se ejecutan al menos una vez al iniciar el componente, y cada vez que cambie la signal a la que están vinculados. Similar a los efects con sus dependencias en React.
+
+A diferencia de React, no es necesario declarar las dependencias del efecto, las signals usadas dentro del efectos tienen seguimiento automático.
+
+No se recomienda usar efectos para hacer peticiones HTTP.
+
+Los efectos deben tener una única función.
+
+Ejemplo de efecto:
+
+    saveToLocalStorage = effect( () => {
+      localStorage.setItem('characters', JSON.stringify(this.characters()))
+    } )
+
 
