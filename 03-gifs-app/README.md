@@ -1,59 +1,35 @@
-# 03GifsApp
+# Gifs APP
+Proyecto para practicar la estructuración de un proyecto en componentes reutilizables.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.8.
+## Extrayendo a componentes
+Es conveniente dividir los proyectos en componentes pequeños (dentro de lo razonable) que contengan la estructura y la lógica de manera aislada. De esa manera una app será más mantenible, legible y reutilizable.
 
-## Development server
+En este caso por ejemplo, se obtuvo la estructra html con estilos tailwind del dashboard al completo, y se fueron creando componente para cada "pieza" que lo componía.
 
-To start a local development server, run:
+Será muy común que unos componentes contengan otros, como por ejemplo side-menu contiene a side-menu-header y side-menu-options. Si existen estas relaciones (que existirán), también es buena práctica que la estructura de carpetas la refleje, para saber dónde buscar cada parte de la app.
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Rutas hijas
+Este proyecto necesita implementar rutas hijas para mostrar páginas como search o trending a la derecha de la pantalla, mientras que a la izquierda se sigue mostrando la barra de administración del dashboard.
+Para hacer esto, los *path* de las paginas deben declararse dentro del *path* de la pagina madre, en un array denominado *children*
 
-## Code scaffolding
+        {
+            path: 'dashboard',
+            loadComponent: () => 
+                import('./gifs/pages/dashboard-page/dashboard-page.component'),
+            children: [
+                {
+                    path: 'trending',
+                    loadComponent: () => 
+                        import('./gifs/pages/trending-page/trending-page.component')
+                },
+                {
+                    path: 'search',
+                    loadComponent: () => 
+                        import('./gifs/pages/search-page/search-page.component')
+                }
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+            ]
+        }
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Ahora las rutas serán *.../dashboard/trending*
