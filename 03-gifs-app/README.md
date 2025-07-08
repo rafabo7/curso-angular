@@ -33,3 +33,19 @@ Para hacer esto, los *path* de las paginas deben declararse dentro del *path* de
         }
 
 Ahora las rutas serán *.../dashboard/trending*
+
+## Environments
+Los archivos environments en un proyecto de Angular almacenan variables de etorno como atributos de una clase *environment* de manera global para usarlas a lo largo de toda la app, por lo que hay que considerar bien qué variables declarar aquí.
+Para usarlas se asgina *environmen* a un atributo de la clase de un componente y se acceden a las distintas variables con notación de objeto.
+
+## Alias para rutas
+A veces las rutas para importar recursos entre clases de un mismo proyecto se pueden alargar debido a la estructura de carpetas.
+Para configurar variables más legibles se añaden en el archivo *tsconfig.json*, dentro de *compilerOptions*.
+
+        "compilerOptions": {
+            "baseUrl": ".",
+            "paths": {
+            "@environments/*": ["src/environments/*"]
+            } ... 
+        }
+baseUrl se refiere al directorio del proyecto, y los paths asignan un identificador legible a cada ruta que queremos simplificar.
