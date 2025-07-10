@@ -61,3 +61,8 @@ Un Observable es un patrón de diseño de Angular que indica que un objeto puede
 
 Angular tiene su propia API de peticiones http, llamada HttpClient. Más versátil y personalizable que el fetch del navegador. Es necesario injectarlo asignado a un objeto dentro de la clase en que se use, y añadir el provider en app.config.ts
 
+### Mapper
+Este proyecto recibe una respuesta http con muchisima info, y solo necesitamos algunas cosas. Para ello se implementa una función que recibe la respuesta completa y se queda sólo con la info que necesita la app.
+
+Esta función se llama *mapper* y se suele declarar en un archivo aislado dentro de la carpeta *app/mapper*
+
