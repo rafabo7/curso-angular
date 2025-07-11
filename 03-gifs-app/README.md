@@ -61,6 +61,23 @@ Un Observable es un patrón de diseño de Angular que indica que un objeto puede
 
 Angular tiene su propia API de peticiones http, llamada HttpClient. Más versátil y personalizable que el fetch del navegador. Es necesario injectarlo asignado a un objeto dentro de la clase en que se use, y añadir el provider en app.config.ts
 
+### Subscrive() en servicios ?
+Generalmente no es recomendable no es recomendable suscribirse a peticiones de httpCliente en la clase del servicio, ya que podría fallar o modificarse la info antes de llegar al componente que debe utilizarla. Pero tampoco se recomienda que la petición devuelva un Observable hacia el componente ya que será común que el objeto observable precise de modificaciones antes de ser usado o renderizado.
+
+Aquí entrar en juego las funciones RXJS, hacia las cuales se redirige el valor retornado de la peticion http (un observable) para hacer de manera encadenada todas las modificaciones necesarias antes de mandar la info hacia el componente, donde solamente se empleará el subscribe().
+
+Para encadenar funciones de RXJS a una petición http se usa:
+
+    .pipe(
+        tap(...),
+        map(...),
+        etc...
+    )
+Cada callback pasa el valor de retorno a la siguiente función.
+
+*Aclaración: en el curso hay una excepción a estas buenas prácticas recomendadas. La función loadTrendingGifs() en GifService se subscribe a la petición http y es ahí donde modifica la info. Es el mismo constructor de GifService quien llama a loadTrendingGifs(). Según los instructores de udemy es común hacer esto para funcionalidades que deben ejecutarse al montar la aplicación y mostrar un contendio inicial, como es caso de los gif en trending-page*
+
+
 ### Mapper
 Este proyecto recibe una respuesta http con muchisima info, y solo necesitamos algunas cosas. Para ello se implementa una función que recibe la respuesta completa y se queda sólo con la info que necesita la app.
 
