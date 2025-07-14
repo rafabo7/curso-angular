@@ -1,11 +1,20 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { map, Observable, tap } from 'rxjs';
 
 import { environment } from '@environments/environment';
+import { GifMapper } from '../mapper/gif.mapper';
 import type { GiphyResponse } from '../interfaces/giphy.interfaces';
 import type { Gif } from '../interfaces/gif.interface';
-import { GifMapper } from '../mapper/gif.mapper';
-import { map, Observable, tap } from 'rxjs';
+
+const SEARCH_HISTORY = "searchHistory"
+
+const loadFromLocaSorage = () => {
+
+    const localStorageGifs = localStorage.getItem(SEARCH_HISTORY) ?? '{}'
+    const parsedGifs = JSON.parse(localStorageGifs)
+    return parsedGifs
+}
 
 @Injectable({providedIn: 'root'})
 export class GifService {
@@ -14,12 +23,20 @@ export class GifService {
         this.loadTrendingGifs()
     }
 
+
+    saveToLocalStorage = effect( () => {
+        
+        localStorage.setItem(SEARCH_HISTORY, JSON.stringify(this.searchHistory()))
+
+    } )
+
+
     trendingGifs = signal<Gif[]>([])
 
     private http = inject(HttpClient)
 
     // Search results as a record, keys as queries
-    searchHistory = signal<Record<string, Gif[]>>({})
+    searchHistory = signal<Record<string, Gif[]>>( loadFromLocaSorage() )
 
     // Keys of record, for aside display of recent searches
     searchHistoryKeys = computed( () => Object.keys(this.searchHistory()) )
@@ -66,7 +83,6 @@ export class GifService {
         return this.searchHistory()[query] ?? []
 
     }
-
 
 
     
