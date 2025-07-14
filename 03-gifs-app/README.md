@@ -61,7 +61,7 @@ Un Observable es un patrón de diseño de Angular que indica que un objeto puede
 
 Angular tiene su propia API de peticiones http, llamada HttpClient. Más versátil y personalizable que el fetch del navegador. Es necesario injectarlo asignado a un objeto dentro de la clase en que se use, y añadir el provider en app.config.ts
 
-### Subscrive() en servicios ?
+### Subscribe() en servicios ?
 Generalmente no es recomendable no es recomendable suscribirse a peticiones de httpCliente en la clase del servicio, ya que podría fallar o modificarse la info antes de llegar al componente que debe utilizarla. Pero tampoco se recomienda que la petición devuelva un Observable hacia el componente ya que será común que el objeto observable precise de modificaciones antes de ser usado o renderizado.
 
 Aquí entrar en juego las funciones RXJS, hacia las cuales se redirige el valor retornado de la peticion http (un observable) para hacer de manera encadenada todas las modificaciones necesarias antes de mandar la info hacia el componente, donde solamente se empleará el subscribe().
@@ -82,4 +82,52 @@ Cada callback pasa el valor de retorno a la siguiente función.
 Este proyecto recibe una respuesta http con muchisima info, y solo necesitamos algunas cosas. Para ello se implementa una función que recibe la respuesta completa y se queda sólo con la info que necesita la app.
 
 Esta función se llama *mapper* y se suele declarar en un archivo aislado dentro de la carpeta *app/mapper*
+
+
+### Persistencia
+Un componente puede cargar información desde una API gracias a las llamadas declaradas en los servicios y a los eventos escuchados en el template del componente. Sin embargo, si esa información (en este caso gifs)  no se almacena de alguna manera al cambiar de página el componente se volverá a renderizar, reinciando el valor de lso inputs y con ellos la información de la petición http.
+
+Para conservar esa información hay varios métodos.
+
+Un método podría ser almacenar la información de las distintas peticiones en el archivo del servicio, en una estructura de datos propia de TypeScript llamada Record\<T,T>. Record es una estructura de datos similar a un objeto o un json, pero con llaves dinámicas.
+
+    searchHistory: Record<string, Gif[]>
+
+
+Claro, lo interesante es que este Record, puede estar asignado a una señal y ser modificaco de manera de dinámica por la app. Y para mostrar en el panel laterial de nuestra app las búsquedas recientes, recuperamos las keys del objeto Record en una señal computada, que se actualizará cuando se actualice la dependiecia con searchHistory.
+
+    // Search results as a record, keys as queries
+    searchHistory = signal<Record<string, Gif[]>>({})
+
+    // Keys of record, for aside display of recent searches
+    searchHistoryKeys = computed( () => Object.keys(this.searchHistory()) )
+
+Dentro del mismo servicio, gracias a las funciones RXJS de httpCliente de Angular, podemos asignar estas señales como un efecto secundario de la petición http.
+
+Una vez tenemos la funcionalidad para almacenar los datos, una función deseable es volver a los resultados de la búsqueda. Para ellos usaremos lo que se conoce como URL dinámicas, es decir, URL que cambiarán según un parámetro para mostrar una u otra información. Estos URL dinámicos es necesario declararlos en el archivo *app.routes.ts*, y quedaría tal que así:
+
+    {
+        path: 'history/:query/:param2/:param3',
+        loadComponent: () => 
+            import('./gifs/pages/gif-history/gif-history.component')
+    },
+
+Luego se podrán concatenar con el URL pasado a [routerLink], así:
+
+     <a [routerLink]="['dashboard/history' , key]" />
+
+Genralmente, un componente puede adaptar su contenido según su url cambien gracias a los parametros de URL dinámicas. En nuestro caso, distintos parametros hacen referencia a distintos resultados de búsqueda.
+
+Para recuperar esa información se usa:
+
+    url = inject(ActivatedRoute).params.subscribe( (para) => console.log(para['query']) )
+
+**Ojito:** ActivatedRoute será un observable que emitirá datos cada vez que la url cambie. Con el atributo params y subscribe, conseguimos emitir solamete el valor de los parametros. La linea anterior imprimirá únicamente el valor del parametro con la key = 'query' (previamente asignado en *app.routes.ts*)
+
+En Angular moderno basado en señales se puede pasar directamente cualquier observable a una signal con *toSignal(Observable)*. Y de nuevo, cualquier observable tiene el método pipe para trabajar con funciones RXJS encadenadas y hacer cálculos o modificaciones antes de usar el observable.
+
+
+
+
+    
 
