@@ -38,6 +38,15 @@ export class GifService {
     // Search results as a record, keys as queries
     searchHistory = signal<Record<string, Gif[]>>( loadFromLocaSorage() )
 
+    masonryGroups = computed<Gif[][]>( () => {
+        const groups = []
+        for ( let i = 0; i < this.trendingGifs().length; i += 3 ) {
+            groups.push( this.trendingGifs().slice(i, i + 3) )
+        }
+        console.log(groups)
+        return groups
+    } )
+
     // Keys of record, for aside display of recent searches
     searchHistoryKeys = computed( () => Object.keys(this.searchHistory()) )
     
