@@ -13,9 +13,22 @@
 
         </thead>
         <tbody>
-            <tr>
-               
-            </tr>
+
+            @for (country of countries(); track country.name; let index = $index) {
+
+                <tr>
+                   <td> {{ index + 1 }} </td>
+                   <td> <img 
+                            class="w-12"
+                            [src]="country.flag" 
+                            [alt]="country.name"> </td>
+                   <td> {{ country.name }} </td>
+                   <td> {{ country.capital }} </td>
+                   <td> {{ country.population }} </td>
+                   <td> <a class="link link-info" href="#">See more</a> </td>
+                </tr>
+
+            }
         </tbody>
     </table>
 </section>
