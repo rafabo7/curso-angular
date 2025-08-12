@@ -8,7 +8,7 @@ export class CountryMapper {
         
         return {
             flag: restCountry.flags.svg,
-            name : restCountry.name.common,
+            name : restCountry.name.official,
             capital : restCountry.capital[0],
             population : restCountry.population
 
