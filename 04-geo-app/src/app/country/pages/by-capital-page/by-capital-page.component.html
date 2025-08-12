@@ -1,10 +1,19 @@
 <!-- country-search-input -->
  <country-search-input 
-    (newSearch)="onSearchedCountry($event)"
+    (newSearch)="query.set($event)"
     placeholder="Search by capital" />
 
 
 
 
 <!-- country-list -->
- <country-list [countries]="countries()" />
+
+@if ( countryResource.error() ) {
+    <div role="alert" class="alert alert-error alert-soft my-3 ">
+  <span>{{ countryResource.error() }} </span>
+</div>
+} @if ( countryResource.hasValue() ) {
+
+  <country-list [countries]="countryResource.value()!" />
+}
+
