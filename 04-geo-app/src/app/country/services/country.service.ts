@@ -29,5 +29,18 @@ export class CountryService {
       )
   }
 
+  searchByCountry( query: string ): Observable<CountryInterface[]> {
+    query = query.toLowerCase()
+
+    return this.http.get<RESTCountry[]>(`${API_URL}/name/${query}`)
+      .pipe(
+        map( resp => CountryMapper.mapRestCountry(resp) ),
+        catchError( err => {
+          console.log("Error fetching", err)
+          return throwError(() => new Error(`No items found with ${query}`))
+        } )
+      )
+  }
+
 
 }
