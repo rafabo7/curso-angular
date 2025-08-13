@@ -4,7 +4,8 @@ import { CountrySearchInputComponent } from "../../components/country-search-inp
 import { CountryListComponent } from "../../components/country-list/country-list.component";
 import { CountryService } from '../../services/country.service';
 import { CountryInterface } from '../../interface/country.interface';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, of } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'by-capital-page',
@@ -17,20 +18,39 @@ export class ByCapitalPageComponent {
 
   query = signal("")
 
-  countryResource = resource({
+  
+
+  capitalResource = rxResource({
     params: () => ({ query: this.query() }),
 
-    loader: async( {params} ) => {
+    stream: ( {params} ) => {
 
-      if ( !params.query ) return []
+      if ( !params.query ) return of([])
 
-      return await firstValueFrom(
-
-        this.countryService.searchByCapital(params.query)
-      )
+      return this.countryService.searchByCapital(params.query)
     }
   })
 
+
+  //* Con resource mejor, aunque el inconveniente es que resource devuelve una promesa que hay procesar con firstValueFrom
+  // countryResource = resource({
+  //   params: () => ({ query: this.query() }),
+
+  //   loader: async( {params} ) => {
+
+  //     if ( !params.query ) return []
+
+  //     return await firstValueFrom(
+
+  //       this.countryService.searchByCapital(params.query)
+  //     )
+  //   }
+  // })
+
+
+
+
+  //* Esta forma de hacerlo funciona pero no es la mejor ni la más eficiente
   // isLoading = signal(false)
   // isError = signal<string|null>(null)
 

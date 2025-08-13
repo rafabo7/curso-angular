@@ -1,6 +1,17 @@
 <country-search-input 
-    placeholder="Search by country" 
+    placeholder="Search by country"
+    (newSearch)="query.set($event)" 
     />
     <!-- (newSearch)=""   -->
+     
 
-<country-list />
+
+@if ( countryResource.error() ) {
+    <div role="alert" class="alert alert-error alert-soft my-3 ">
+  <span>{{ countryResource.error() }} </span>
+</div>
+} @if ( countryResource.hasValue() ) {
+
+  <country-list [countries]="countryResource.value()!" />
+}
+

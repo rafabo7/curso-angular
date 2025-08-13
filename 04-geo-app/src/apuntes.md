@@ -41,3 +41,28 @@ El loader devuelve una promesa (un observable), que a veces puede ser útil, per
 
 
 Algunas funciones propias del loader son *hasValue(), error(), value()* y otras, y son señales propias del loader. error() captura el error lanzado por el servicio que hace la petición
+
+El incoveniente de este método es que devuelve y trabaja con promesas en el loader y generalmente nosotros esperaremos un observable, por lo que es necesesario para el valor devuelto por *firstValueOf*
+
+### RxResource 
+
+Similar a resource, pero este ya devuelve un observable, puediendo prescindir de firstValueOf
+
+Su implementación es muy parecida, está experimental, hay que revisar periódicamente la documentación, algunas opciones cambién de nomenclatura con las versiones. Revisar en *rxResourceOptions*
+
+Se usuaría de la siguiente manera:
+
+
+    capitalResource = rxResource({
+      params: () => ({ query: this.query() }),
+
+      stream: ( {params} ) => {
+
+        if ( !params.query ) return of([])
+
+        return this.countryService.searchByCapital(params.query)
+      }
+    })
+
+**of convierte un elemento en un Observable basado en ese elemento, en este caso un array vacío**
+

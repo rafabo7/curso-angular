@@ -8,12 +8,12 @@
 
 <!-- country-list -->
 
-@if ( countryResource.error() ) {
+@if ( capitalResource.error() ) {
     <div role="alert" class="alert alert-error alert-soft my-3 ">
-  <span>{{ countryResource.error() }} </span>
+  <span>{{ capitalResource.error() }} </span>
 </div>
-} @if ( countryResource.hasValue() ) {
+} @if ( capitalResource.hasValue() ) {
 
-  <country-list [countries]="countryResource.value()!" />
+  <country-list [countries]="capitalResource.value()!" />
 }
 
