@@ -100,7 +100,10 @@ export interface Name {
 }
 
 export interface NativeName {
-    est: Translation;
+    [key: string]: {
+        official: string,
+        common: string
+    };
 }
 
 export interface Translation {
