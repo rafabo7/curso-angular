@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { RESTCountry } from '../interface/rest-countries.interfaces';
 import { CountryMapper } from '../mappers/country.mapper';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, delay, map, Observable, throwError } from 'rxjs';
 import { CountryInterface } from '../interface/country.interface';
 
 const API_URL = 'https://restcountries.com/v3.1'
@@ -38,6 +38,19 @@ export class CountryService {
         catchError( err => {
           console.log("Error fetching", err)
           return throwError(() => new Error(`No items found with ${query}`))
+        } )
+      )
+  }
+
+  searchByCode( code: string ): Observable<CountryInterface|undefined> {
+    
+    return this.http.get<RESTCountry[]>(`${API_URL}/alpha/${code}`)
+      .pipe(
+        map( resp => CountryMapper.mapRestCountry(resp) ),
+        map( countries => countries[0] ),
+        catchError( err => {
+          console.log("Error fetching", err)
+          return throwError(() => new Error(`No items found with code:${code}`))
         } )
       )
   }
