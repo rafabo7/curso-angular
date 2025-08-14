@@ -32,10 +32,35 @@
                    <td> 
                     <a 
                         [routerLink]="['/country/by', country.cca2]"  
-                        class="link link-info" href="#">See more</a> </td>
+                        class="link-accent" href="#">See more</a> </td>
                 </tr>
 
             }
+
+            @if (errorMessage()) {
+                <tr>
+                    <td class="text-center" colspan="8" >
+                        {{ errorMessage() }}
+                    </td>
+                </tr>
+            } @else if (isLoading()) {
+
+                <tr>
+                    <td class="text-center" colspan="8" >
+                        Loading...
+                    </td>
+                </tr>
+                
+            } @else if (countries().length === 0 && !isLoading()) {
+                <tr>
+                    <td class="text-center" colspan="8" >
+                        No results found
+                    </td>
+                </tr>
+            }
+
+
+            
         </tbody>
     </table>
 </section>

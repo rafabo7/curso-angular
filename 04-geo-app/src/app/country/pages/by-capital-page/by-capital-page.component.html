@@ -4,16 +4,11 @@
     placeholder="Search by capital" />
 
 
-
-
-<!-- country-list -->
-
-@if ( capitalResource.error() ) {
-    <div role="alert" class="alert alert-error alert-soft my-3 ">
-  <span>{{ capitalResource.error() }} </span>
-</div>
-} @if ( capitalResource.hasValue() ) {
-
-  <country-list [countries]="capitalResource.value()!" />
-}
-
+     
+<country-list 
+  [countries]="capitalResource.value() ?? []"
+  [errorMessage]="capitalResource.error()"
+  [isEmpty]="capitalResource.value()?.length === 0"
+  [isLoading]="capitalResource.isLoading()" 
+  
+/>
