@@ -1,1 +1,22 @@
-<p>country-page works!</p>,
+
+
+@if (countryResource.error()) {
+
+    <shared-not-found/>
+}
+
+@if (countryResource.isLoading()) {
+    <h2 class="text-2xl alert-info">Loading...</h2>
+}
+
+@if (countryResource.hasValue()) {
+
+    <country-info 
+        [countryInfo]="countryResource.value()"
+    />
+
+}
+    
+   
+
+

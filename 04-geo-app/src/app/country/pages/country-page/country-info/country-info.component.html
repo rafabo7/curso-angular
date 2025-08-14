@@ -1,0 +1,44 @@
+<div class="flex items-center justify-center mt-4">
+    
+    <div class="stats stats-vertical shadow lg:stats-horizontal ">
+      <div class="stat">
+    
+        <div class="stat-title text-base"> {{ countryInfo().name }} </div>
+        <div class="stat-value italic"> {{ countryInfo().nativeName }} </div>
+        <div class="stat-desc text-base"> {{ countryInfo().subregion }} </div>
+      </div>
+    
+      <div class="stat">
+    
+        <div class="stat-title text-base">Population</div>
+        <div class="stat-value"> {{ countryInfo().population | number }} </div>
+        <div class="stat-title text-base">Area</div>
+        <div class="stat-value"> {{ countryInfo().area | number }} </div>
+        <div class="stat-desc text-base"> {{ countryInfo().popDensity | number: '1.0-1' }}/km of population density </div>
+      </div>
+    
+      <div class="stat">
+    
+        <div class="stat-title text-base">Flag and Coats Of Arms</div>
+    
+        <div class="flex flex-row gap-3 items-center px-3 py-6">
+            <img width="164px" [src]="countryInfo().flag" alt="">
+            <img width="82px" [src]="countryInfo().coatOfArms" alt="">
+        </div>
+        
+      </div>
+    
+      <div class="stat">
+    
+        <div class="stat-title text-base">Languages</div>
+    
+        @for (lang of countryInfo().languages; track $index) {
+    
+            <div class="stat-value text-base font-light"> {{ lang }} </div>
+        }
+    
+    
+      </div>
+    
+    </div>
+</div>
